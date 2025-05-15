@@ -38,9 +38,7 @@ class GuestController extends BaseController
     public function show(int $id): ResponseInterface
     {
         try {
-            $guest = $this->guestService->getGuestById($id);
-
-            if (!$guest) {
+            if(!$guest = $this->getGuestById($id)) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
             }
 
@@ -80,9 +78,7 @@ class GuestController extends BaseController
     public function update(int $id): ResponseInterface
     {
         try {
-            $guest = $this->guestService->getGuestById($id);
-
-            if (!$guest) {
+            if (!$this->getGuestById($id)) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
             }
             
@@ -107,9 +103,7 @@ class GuestController extends BaseController
     public function delete(int $id): ResponseInterface
     {
         try {
-            $guest = $this->guestService->getGuestById($id);
-
-            if (!$guest) {
+            if (!$this->getGuestById($id)) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
             }
 
@@ -120,5 +114,16 @@ class GuestController extends BaseController
 
             return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while deleting the guest.'])->setStatusCode(500);
         }
+    }
+    
+    /**
+     * getGuestById
+     *
+     * @param  int $id
+     * @return array|null
+     */
+    private function getGuestById(int $id): ?array
+    {
+        return $this->guestService->getGuestById($id);
     }
 }
