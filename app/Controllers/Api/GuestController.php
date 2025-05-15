@@ -29,6 +29,27 @@ class GuestController extends BaseController
         ])->setStatusCode(200);
     }    
     
+    /**
+     * show
+     *
+     * @param  int $id
+     * @return ResponseInterface
+     */
+    public function show(int $id): ResponseInterface
+    {
+        try {
+            $guest = $this->guestService->getGuestById($id);
+
+            if (!$guest) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
+            }
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Guest retrieved successfully', 'data' => $guest])->setStatusCode(200);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while retrieving the guest.'])->setStatusCode(500);
+        }
+    }
+    
     
     /**
      * store

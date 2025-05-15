@@ -19,6 +19,17 @@ class GuestService
     {
         return $this->guestRepository->getAll();
     }
+    
+    /**
+     * getGuestById
+     *
+     * @param  int $id
+     * @return array|null
+     */
+    public function getGuestById(int $id): ?array
+    {
+        return $this->guestRepository->getById($id);
+    }
 
     public function createGuest(array $data): array
     {
