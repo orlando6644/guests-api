@@ -30,7 +30,13 @@ class GuestService
     {
         return $this->guestRepository->getById($id);
     }
-
+    
+    /**
+     * createGuest
+     *
+     * @param  array $data
+     * @return array
+     */
     public function createGuest(array $data): array
     {
         $validation = \Config\Services::validation();
@@ -46,5 +52,29 @@ class GuestService
         }
 
        return $this->guestRepository->create($data);
+    }
+    
+    /**
+     * updateGuest
+     *
+     * @param  int $id
+     * @param  array $data
+     * @return bool
+     */
+    public function updateGuest(int $id, array $data): bool
+    {
+        $validation = \Config\Services::validation();
+        
+        $validation->setRules([
+            'name'  => 'required|min_length[3]|max_length[100]',
+            'email' => 'required|valid_email|max_length[150]|is_unique[guests.email,id,'.$id.']',
+            'phone' => 'permit_empty|max_length[20]',
+        ]);
+
+        if (!$validation->run($data)) {
+            throw new ValidationException(implode(', ', $validation->getErrors()));
+        }
+
+        return $this->guestRepository->update($id, $data);
     }
 }

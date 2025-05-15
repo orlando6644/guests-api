@@ -70,4 +70,31 @@ class GuestController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while creating the guest.'])->setStatusCode(500);
         }
     }
+    
+    /**
+     * update
+     *
+     * @param  int $id
+     * @return ResponseInterface
+     */
+    public function update(int $id): ResponseInterface
+    {
+        try {
+            $guest = $this->guestService->getGuestById($id);
+
+            if (!$guest) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
+            }
+            
+            $this->guestService->updateGuest($id, $this->request->getJSON(true));
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Guest updated successfully', 'data' => []])->setStatusCode(200);
+        } catch (\CodeIgniter\Validation\Exceptions\ValidationException $e) {
+
+            return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()])->setStatusCode(422);
+        } catch (\Exception $e) {
+            
+            return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while updating the guest.'])->setStatusCode(500);
+        }
+    }
 }
