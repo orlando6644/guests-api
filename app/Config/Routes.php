@@ -12,4 +12,5 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('guests/(:num)', 'GuestController::show/$1');
     $routes->post('guests', 'GuestController::store');
     $routes->put('guests/(:num)', 'GuestController::update/$1');
+    $routes->delete('guests/(:num)', 'GuestController::delete/$1');
 });

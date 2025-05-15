@@ -97,4 +97,28 @@ class GuestController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while updating the guest.'])->setStatusCode(500);
         }
     }
+    
+    /**
+     * delete
+     *
+     * @param  int $id
+     * @return ResponseInterface
+     */
+    public function delete(int $id): ResponseInterface
+    {
+        try {
+            $guest = $this->guestService->getGuestById($id);
+
+            if (!$guest) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Guest not found'])->setStatusCode(404);
+            }
+
+            $this->guestService->deleteGuest($id);
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Guest deleted successfully'])->setStatusCode(200);
+        } catch (\Exception $e) {
+
+            return $this->response->setJSON(['status' => 'error', 'message' => 'An error occurred while deleting the guest.'])->setStatusCode(500);
+        }
+    }
 }

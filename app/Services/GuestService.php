@@ -77,4 +77,15 @@ class GuestService
 
         return $this->guestRepository->update($id, $data);
     }
+    
+    /**
+     * deleteGuest
+     *
+     * @param  int $id
+     * @return bool
+     */
+    public function deleteGuest(int $id): bool
+    {
+        return $this->guestRepository->delete($id);
+    }
 }
