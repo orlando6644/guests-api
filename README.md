@@ -1,52 +1,96 @@
-# CodeIgniter 4 Application Starter
+# 🎉 Guest Management API
 
-## What is CodeIgniter?
+A RESTful API built with **CodeIgniter 4** to manage event guests.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🚀 Features
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- Create, list, retrieve, update, and delete guests
+- Input validation (name and email)
+- Database: MySQL
+- JSON responses
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+---
 
-## Installation & updates
+## 🧱 Requirements
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- PHP 8.x
+- Composer
+- MySQL 5.7+
+- CodeIgniter 4.x
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+---
 
-## Setup
+## ⚙️ Installation
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+1. Clone the repository:
+  ```bash
+    git clone https://github.com/orlando6644/guests-app.git
+    cd guests-app
+  ```
+2. Install dependencies:
+  ```bash
+    composer install
+  ```
+3. Configure environment:
+- Copy .env.example to .env and set your database credentials:
+  ```bash
+    database.default.hostname = localhost
+    database.default.database = guests_db
+    database.default.username = root
+    database.default.password = root
+    database.default.DBDriver = MySQLi
+  ```
+4. Run migrations:
+  ```bash
+  php spark migrate
+  ```
+5. Start the local development server:
+  ```bash
+    php spark serve
+  ```
 
-## Important Change with index.php
+## 📌 API Endpoints
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- `GET /api/guests` — List all guests
+- `GET /api/guests/{id}` — Retrieve a guest by ID
+- `POST /api/guests` — Create a new guest
+- `PUT /api/guests/{id}` — Update an existing guest
+- `DELETE /api/guests/{id}` — Soft delete a guest
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### Example request to create a guest
 
-**Please** read the user guide for a better explanation of how CI4 works!
+```json
+POST /api/guests
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "555-1234"
+}
+```
+### Example request to retrieve a guest by ID
 
-## Repository Management
+```http
+GET /api/guests/1
+```
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### Example request to update a guest
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+```json
+PUT /api/guests/1
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "phone": "555-5678"
+}
+```
+
+### Example request to soft delete a guest
+
+```http
+DELETE /api/guests/1
+```
 
 ## Server Requirements
 
