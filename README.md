@@ -26,8 +26,8 @@ A RESTful API built with **CodeIgniter 4** to manage event guests.
 
 1. Clone the repository:
   ```bash
-    git clone https://github.com/orlando6644/guests-app.git
-    cd guests-app
+    git clone https://github.com/orlando6644/guests-api.git
+    cd guests-api
   ```
 2. Install dependencies:
   ```bash
