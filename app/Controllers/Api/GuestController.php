@@ -3,7 +3,7 @@
 namespace  App\Controllers\Api;
 
 use App\Controllers\BaseController;
-use App\Services\GuestService;
+use App\Services\Api\GuestService;
 use App\Repositories\GuestRepository;
 use CodeIgniter\HTTP\ResponseInterface;
 
