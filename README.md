@@ -34,7 +34,7 @@ A RESTful API built with **CodeIgniter 4** to manage event guests.
     composer install
   ```
 3. Configure environment:
-- Copy .env.example to .env and set your database credentials:
+- Copy env example file to .env and set your database credentials:
   ```bash
     database.default.hostname = localhost
     database.default.database = guests_db
